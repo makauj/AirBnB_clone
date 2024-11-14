@@ -2,13 +2,12 @@
 """entry point of the command interpreter"""
 
 import cmd
-from cmd import Cmd
 import shlex
 from models import storage
 from models.base_model import BaseModel
 
 
-class HBNBCommand(cmd, Cmd):
+class HBNBCommand(cmd.Cmd):
     """command line interpreter"""
     
     prompt = '(hbnb)'
