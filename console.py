@@ -34,7 +34,7 @@ class HBNBCommand(cmd.Cmd):
 
     def create(self, arg):
         """Create a new instance of BaseModel"""
-        commands  = shlex.splir(arg)
+        commands = shlex.splir(arg)
 
         if len(commands) == 0:
             print(f"*** class name missing")
@@ -44,7 +44,6 @@ class HBNBCommand(cmd.Cmd):
             new_instance = eval(f"{commands[0]}()")
             storage.save()
             print(new_instance.id)
-
 
 
 if __name__ == "__main__":

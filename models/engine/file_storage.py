@@ -33,14 +33,13 @@ class FileStorage():
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 try:
                     obj_dict = json.load(f)
-                    
+
                     for key, value in obj_dict.items():
                         class_name, obj_id = key.split(".")
-                        
+
                         cls = eval(class_name)
                         instance = cls(**value)
-                        
+
                         FileStorage.__objects[key] = instance
                 except Exception:
                     pass
-    
