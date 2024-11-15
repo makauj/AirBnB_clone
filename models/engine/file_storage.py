@@ -5,7 +5,6 @@ file storage class
 
 import json
 import os
-import uuid
 from models.base_model import BaseModel
 
 
@@ -20,12 +19,15 @@ class FileStorage():
         return FileStorage.__objects
 
     def new(self, obj):
-        """"""
+        """Adds a new object to the storage"""
         key = f"{obj.__class__.__name__}.{obj.id}"
         FileStorage.__objects[key] = obj
 
     def save(self):
         """Method serializes __objects to the JSON file"""
+        with open(self.__file_path, "w") as f:
+            json.dump({key: obj.to_dict() for key,
+                       obj in self.__objects.items()}, f)
 
     def reload(self):
         """Method to deserialize JSON file to objects"""
