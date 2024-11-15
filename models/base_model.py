@@ -4,11 +4,11 @@
 
 import uuid
 from datetime import datetime
-import models
+from models.engine.file_storage import FileStorage
 
 
 class BaseModel():
-    """Base Model"""
+    """BaseModel class"""
     def __init__(self, *args, **kwargs):
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:

@@ -24,7 +24,7 @@ class HBNBCommand(cmd.Cmd):
         """Custom help for AirBnB project"""
         super().do_help(arg)
 
-    def emptylibe(self):
+    def emptyline(self):
         """Override emptyline method to prevent execution of empty commands"""
         pass
 
@@ -37,13 +37,63 @@ class HBNBCommand(cmd.Cmd):
         commands = shlex.splir(arg)
 
         if len(commands) == 0:
-            print(f"*** class name missing")
+            print(f"** class name missing **")
         elif commands[0] not in self.valid_classes:
-            print("*** class doesn't exist")
+            print("** class doesn't exist **")
         else:
             new_instance = eval(f"{commands[0]}()")
             storage.save()
             print(new_instance.id)
+    
+    def show(self, arg):
+        """
+        Print string representtion of an instance based on class, name and id
+        """
+        if not arg:
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            if args[0] is not "BaseModel":
+                print("** instance id missing **")
+            elif len(args) < 2:
+                print("** instance id missing **")
+            else:
+                key = f"BaseModel.{args[1]}"
+                if key in storage.all():
+                    print(storage.all()[key])
+                else:
+                    print("** no instance found **")
+    
+    def do_destroy(self, arg):
+        """Deletes an instance based on the class name and id"""
+        if not arg:
+            print("** class name missing **")
+        else:
+            args = arg.split()
+            if args[0] is not "BaseModel":
+                print("** class doesn't exits **")
+            elif len(args) < 2:
+                print("** instance id missing **")
+            else:
+                key = f"BaseModel.{args[1]}"
+                if key in storage.all():
+                    del storage.all()[key]
+                    storage.save()
+                else:
+                    print("** no instance found **")
+    
+    def do_all(self, arg):
+        """
+        Prints all string representation of all instances
+        based or not on the class name
+        """
+        if arg and arg is not "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            instances = [str{instance} for instance in storage.all().values()]
+            print(f"[{', '.join(instances)}]")
+            
+
 
 
 if __name__ == "__main__":
