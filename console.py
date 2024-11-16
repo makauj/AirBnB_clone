@@ -1,18 +1,12 @@
 #!/usr/bin/python3
 """entry point of the command interpreter"""
 
-import cmd
 import ast
-import shlex
+import cmd
 import re
+import shlex
+
 from models import storage
-from models.base_model import BaseModel
-from models.user import User
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.city import City
 
 
 def split_args(e_arg):
@@ -77,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
         """Create a new instance of BaseModel"""
         commands = shlex.split(arg)
 
-        if len(commands) is 0:
+        if len(commands) == 0:
             print(f"** class name missing **")
         elif commands[0] not in self.valid_classes:
             print("** class doesn't exist **")
@@ -94,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] is not "BaseModel":
+            if args[0] != "BaseModel":
                 print("** instance id missing **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -111,7 +105,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] is not "BaseModel":
+            if args[0] != "BaseModel":
                 print("** class doesn't exits **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -131,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
         objects = storage.all()
         commands = shlex.split(arg)
 
-        if arg and arg is not "BaseModel":
+        if arg and arg != "BaseModel":
             print("** class doesn't exist **")
         else:
             for key, value in objects.items():
@@ -150,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) < 2:
             print("** instance id missing **")
         else:
-            objects =storage.all()
+            objects = storage.all()
 
             class_name, instance_id = args[0], args[1]
             key = f"{class_name}.{instance_id}"
@@ -162,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** value missing **")
             else:
                 instance = objects[key]
-                braces =re.search(r"\{(.*?)\}", arg)
+                braces = re.search(r"\{(.*?)\}", arg)
 
                 if braces:
                     try:
@@ -214,7 +208,7 @@ class HBNBCommand(cmd.Cmd):
             'count': self.do_count
         }
         if cmd_method in method_dict.keys():
-            if cmd_method is not 'update':
+            if cmd_method != 'update':
                 return (method_dict[cmd_method]
                         (f"{class_name} {extra_arg}"))
             else:
@@ -226,7 +220,7 @@ class HBNBCommand(cmd.Cmd):
                 except Exception:
                     pass
                 try:
-                    call = method_dict(cmd_method)
+                    call = method_dict[cmd_method]
                     return call(f"{class_name} {obj_id} {arg_dict}")
                 except Exception:
                     pass
@@ -241,15 +235,14 @@ class HBNBCommand(cmd.Cmd):
 
         if not arg:
             print("** class name missing **")
-        
+
         cls_name = commands[0]
         if cls_name in self.valid_classes:
             count = sum(1 for obj in objs.values()
                         if obj.__class__.__name__ == cls_name)
             print(count)
         else:
-                print("** invalid class name **")
-        
+            print("** invalid class name **")
 
 
 if __name__ == "__main__":

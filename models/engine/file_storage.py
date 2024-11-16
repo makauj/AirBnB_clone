@@ -5,13 +5,6 @@ file storage class
 
 import json
 import os
-from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 
 
 class FileStorage():
@@ -33,7 +26,7 @@ class FileStorage():
         """Method serializes __objects to the JSON file"""
         with open(self.__file_path, "w", encoding="utf-8") as f:
             json.dump({key: obj.to_dict() for key,
-                       obj in self.__objects.items()}, f)
+            obj in self.__objects.items()}, f)
 
     def reload(self):
         """Method to deserialize JSON file to objects"""

@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 """Base model for the AirBnB clone Console"""
 
-
 import uuid
 from datetime import datetime
-from models.engine.file_storage import FileStorage
+
+import models
 
 
 class BaseModel():
     """BaseModel class"""
+
     def __init__(self, *args, **kwargs):
         time_format = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
@@ -19,11 +20,11 @@ class BaseModel():
                     setattr(self, key, datetime.strptime(value, time_format))
                 else:
                     setattr(self, key, value)
-        else:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-        
+
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+
         models.storage.new(self)
 
     def __str__(self):

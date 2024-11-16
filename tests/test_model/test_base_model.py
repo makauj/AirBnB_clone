@@ -2,6 +2,7 @@
 """unit tests for base_model.py"""
 
 import unittest
+
 from models.base_model import BaseModel
 
 
@@ -32,7 +33,7 @@ class TestBaseModel(unittest.TestCase):
         my_model = BaseModel()
 
         my_model_dict = my_model.to_dict()
-        self.assertIsInstance(my_model_dict. dict)
+        self.assertIsInstance(my_model_dict.dict)
         self.assertEqual(my_model_dict["__class__"], 'BaseModel')
         self.assertEqual(my_model_dict["id"], my_model.id)
         self.assertEqual(["created_at"], my_model.created_at.isoformat())
