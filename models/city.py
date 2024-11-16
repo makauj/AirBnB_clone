@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """City class"""
 
-from models.base_model import BaseModel
+from models.base_model import BaseModel  # type: ignore
 
 
 class City(BaseModel):

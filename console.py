@@ -44,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance = eval(f"{commands[0]}()")
             storage.save()
             print(new_instance.id)
-    
+
     def show(self, arg):
         """
         Print string representtion of an instance based on class, name and id
@@ -63,7 +63,7 @@ class HBNBCommand(cmd.Cmd):
                     print(storage.all()[key])
                 else:
                     print("** no instance found **")
-    
+
     def do_destroy(self, arg):
         """Deletes an instance based on the class name and id"""
         if not arg:
@@ -81,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
                 else:
                     print("** no instance found **")
-    
+
     def do_all(self, arg):
         """
         Prints all string representation of all instances
@@ -96,10 +96,9 @@ class HBNBCommand(cmd.Cmd):
             for key, value in objects.items():
                 if key.split(',')[0] == commands[0]:
                     print(str(value))
-    
+
     def do_count(self, arg):
         """Counts and ret"""
-
 
 
 if __name__ == "__main__":

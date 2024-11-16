@@ -4,7 +4,8 @@
 
 import uuid
 from datetime import datetime
-from models.engine.file_storage import FileStorage # type: ignore
+import models # type: ignore
+from models.engine.file_storage import FileStorage #  type: ignore
 
 
 class BaseModel():
@@ -23,6 +24,8 @@ class BaseModel():
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+        
+        models.storage.new(self)
 
     def __str__(self):
         """return a string representative of the object class"""

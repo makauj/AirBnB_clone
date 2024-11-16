@@ -5,7 +5,7 @@ file storage class
 
 import json
 import os
-from models.base_model import BaseModel # type: ignore
+from models.base_model import BaseModel  # type: ignore
 
 
 class FileStorage():
