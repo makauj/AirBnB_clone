@@ -4,7 +4,7 @@
 
 import uuid
 from datetime import datetime
-from models.engine.file_storage import FileStorage
+from models.engine.file_storage import FileStorage # type: ignore
 
 
 class BaseModel():
