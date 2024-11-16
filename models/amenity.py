@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """amenity class"""
 
-from models.base_model import BaseModel
+from models.base_model import BaseModel # type: ignore
 
 
 class Amenity(BaseModel):

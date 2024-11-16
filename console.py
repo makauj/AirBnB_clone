@@ -87,12 +87,18 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all instances
         based or not on the class name
         """
+        objects = storage.all()
+        commands = shlex.split(arg)
+
         if arg and arg is not "BaseModel":
             print("** class doesn't exist **")
         else:
-            instances = [str{instance} for instance in storage.all().values()]
-            print(f"[{', '.join(instances)}]")
-            
+            for key, value in objects.items():
+                if key.split(',')[0] == commands[0]:
+                    print(str(value))
+    
+    def do_count(self, arg):
+        """Counts and ret"""
 
 
 

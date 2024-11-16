@@ -10,9 +10,9 @@ from models.base_model import BaseModel # type: ignore
 
 class FileStorage():
     """Class that searializes instances to JSON file"""
-    def __init__(self):
-        self.__file_path = "file.json"
-        self.__objects = {}
+
+    __file_path = "file.json"
+    __objects = {}
 
     def all(self):
         """returns dictionary objects"""
@@ -25,7 +25,7 @@ class FileStorage():
 
     def save(self):
         """Method serializes __objects to the JSON file"""
-        with open(self.__file_path, "w") as f:
+        with open(self.__file_path, "w", encoding="utf-8") as f:
             json.dump({key: obj.to_dict() for key,
                        obj in self.__objects.items()}, f)
 
