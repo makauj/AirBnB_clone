@@ -4,7 +4,6 @@
 import cmd
 import shlex
 from models import storage
-from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,6 +14,10 @@ class HBNBCommand(cmd.Cmd):
     def quit(self, arg):
         """quit the command line interpreter"""
         return True
+    
+    def help_quit(self, arg):
+        """help information about quit command"""
+        print("Quit command to exit program")
 
     def do_EOF(self, arg):
         """Exit cmd on EOF"""
@@ -30,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, arg):
         """Handle default case when an unknown command is entered"""
-        print(f"*** Unknown syntax: {arg}")
+        print(f"** Unknown syntax: {arg} **")
 
     def create(self, arg):
         """Create a new instance of BaseModel"""
