@@ -24,13 +24,13 @@ def split_args(e_arg):
             arg_dict = ast.literal_eval("{" + str_data + "}")
         except Exception:
             print("**  invalid dictionary format **")
-            return
+            return "", {}
         return id, arg_dict
     else:
         commands = e_arg.split(",")
-        if commands:
+        if len(commands) >= 3:
             try:
-                id = commands[0]
+                id = commands[0].strip()
             except Exception:
                 return "", ""
             try:
@@ -76,9 +76,13 @@ class HBNBCommand(cmd.Cmd):
         elif commands[0] not in self.valid_classes:
             print("** class doesn't exist **")
         else:
-            new_instance = eval(f"{commands[0]}()")
-            storage.save()
-            print(new_instance.id)
+            class_name = commands[0]
+            if class_name in self.valid_classes:
+                class_ = globals().get(class_name)
+                if class_:
+                    new_instance = class_()
+                    storage.save()
+                    print(new_instance.id)
 
     def do_show(self, arg):
         """
@@ -88,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] != "BaseModel":
+            if args[0] not in self.valid_classes:
                 print("** instance id missing **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -105,7 +109,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         else:
             args = arg.split()
-            if args[0] != "BaseModel":
+            if args[0] not in self.valid_classes:
                 print("** class doesn't exits **")
             elif len(args) < 2:
                 print("** instance id missing **")
@@ -125,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
         objects = storage.all()
         commands = shlex.split(arg)
 
-        if arg and arg != "BaseModel":
+        if arg and arg not in self.valid_classes:
             print("** class doesn't exist **")
         else:
             for key, value in objects.items():
@@ -205,7 +209,8 @@ class HBNBCommand(cmd.Cmd):
             'show': self.do_show,
             'destroy': self.do_show,
             'update': self.update,
-            'count': self.do_count
+            'count': self.do_count,
+            'create': self.do_create
         }
         if cmd_method in method_dict.keys():
             if cmd_method != 'update':
@@ -217,9 +222,6 @@ class HBNBCommand(cmd.Cmd):
                     return
                 try:
                     obj_id, arg_dict = split_args(extra_arg)
-                except Exception:
-                    pass
-                try:
                     call = method_dict[cmd_method]
                     return call(f"{class_name} {obj_id} {arg_dict}")
                 except Exception:
@@ -235,6 +237,7 @@ class HBNBCommand(cmd.Cmd):
 
         if not arg:
             print("** class name missing **")
+            return
 
         cls_name = commands[0]
         if cls_name in self.valid_classes:
