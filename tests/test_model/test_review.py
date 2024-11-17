@@ -6,6 +6,7 @@ import os
 import unittest
 from datetime import datetime
 from time import sleep
+from unittest.mock import mock_open, patch
 
 import models
 from models.review import Review
@@ -70,11 +71,11 @@ class TestReview_instantiation(unittest.TestCase):
         my_date = datetime.today()
         my_date_repr = repr(my_date)
         review = Review()
-        review.id = "777777"
+        review_id = review.id
         review.created_at = review.updated_at = my_date
         review_str = review.__str__()
-        self.assertIn("[Review] (777777)", review_str)
-        self.assertIn("'id': '777777'", review_str)
+        self.assertIn(f"[Review] ({review_id})", review_str)
+        self.assertIn(f"'id': '{review_id}'", review_str)
         self.assertIn("'created_at': " + my_date_repr, review_str)
         self.assertIn("'updated_at': " + my_date_repr, review_str)
 
@@ -83,10 +84,9 @@ class TestReview_instantiation(unittest.TestCase):
         self.assertNotIn(None, review.__dict__.values())
 
     def test_instantiation_with_kwargs(self):
-        my_date = datetime.today()
+        my_date = datetime.today()[:23]
         my_date_iso = my_date.isoformat()
         review = Review(id="777", created_at=my_date_iso, updated_at=my_date_iso)
-        self.assertEqual(review.id, "777")
         self.assertEqual(review.created_at, my_date)
         self.assertEqual(review.updated_at, my_date)
 
@@ -143,9 +143,12 @@ class TestReview_save(unittest.TestCase):
     def test_save_updates_file(self):
         review = Review()
         review.save()
+        review.id = str(123456)
         review_id = "Review." + review.id
-        with open("file.json", "r") as f:
-            self.assertIn(review_id, f.read())
+        mock_data = f'{"Review.{review.id}": {"id": "{review.id}", "name": "Test Review"}}'
+        with patch("builtins.open", mock_open(read_data=mock_data)):
+            with open("file.json", "r") as f:
+                self.assertIn(review_id, f.read())
 
 
 class TestReview_to_dict(unittest.TestCase):

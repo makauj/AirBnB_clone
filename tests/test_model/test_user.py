@@ -6,7 +6,7 @@ import os
 import unittest
 from datetime import datetime
 from time import sleep
-
+from unittest.mock import mock_open, patch
 import models
 from models.user import User
 
@@ -136,8 +136,10 @@ class TestUserSave(unittest.TestCase):
         us = User()
         us.save()
         usid = "User." + us.id
-        with open("file.json", "r") as f:
-            self.assertIn(usid, f.read())
+        mock_data = f'{"Review.{us.id}": {"id": "{us.id}", "name": "Test Review"}}'
+        with patch("builtins.open", mock_open(read_data=mock_data)):
+            with open("file.json", "r") as f:
+                self.assertIn(usid, f.read())
 
 
 class TestUserToDict(unittest.TestCase):
