@@ -9,6 +9,36 @@ This repository contains:
 2. A **serialization engine** that converts instances to and from JSON, enabling persistent storage of objects.
 3. Unit tests to ensure the CLI commands work as expected.
 
+### Project Structure
+
+Here is the expected project structure based on your description:
+
+```
+AirBnB_clone/
+│
+├── console.py
+│
+├── models/
+│   ├── __init__.py
+│   ├── base_models.py
+|   ├── amenity.py
+│   ├── city.py
+│   ├── place.py
+│   ├── review.py
+│   ├── state.py
+│   └── user.py
+│   └── engine/
+│       ├── __init__.py
+│       └── file_storage.py
+│
+└── test/
+    ├── __init__.py
+    ├── test_base_model.py
+    ├── test_file_storage.py
+    ├── test_console.py
+    └── test_models.py
+```
+
 ## Features
 
 - **Command Interpreter**: Interacts with the AirBnB object models through commands like `create`, `show`, `destroy`, `update`, `all`, and `count`.
