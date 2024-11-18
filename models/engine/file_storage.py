@@ -41,7 +41,7 @@ class FileStorage():
             with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
                 try:
                     obj_dict = json.load(f)
-                    
+
                     class_mapping = {
                         'BaseModel': BaseModel,
                         'user': User,
