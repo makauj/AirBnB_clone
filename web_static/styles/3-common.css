@@ -1,0 +1,13 @@
+/* global body style sheet */
+
+body {
+    margin: 0;
+    background-color: #FF0000;
+    padding: 0;
+    color: #484848;
+    font-size: 14px;
+    font-family: Circular, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+.content {
+    flex-grow: 1;
+}
