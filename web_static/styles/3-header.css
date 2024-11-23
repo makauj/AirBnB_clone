@@ -7,9 +7,11 @@ header {
 }
 
 .logo {
+    height: 100%;
+    width: 142px;
     background-image: url('../images/logo.png');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 40;
-    width: 40;
+    background-position: center;
+    margin-left: 20px;
 }
