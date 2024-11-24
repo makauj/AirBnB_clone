@@ -1,0 +1,28 @@
+/*Places design stylesheet*/
+.places {
+    font-size: 30px;
+    text-align: center;
+	margin: 45px auto;
+    vertical-align: top;
+}
+ .places h1 {
+    font-size: 30px;
+    text-align: left;
+ }
+
+article {
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ff5a5f;
+    border-radius: 4px;
+    font-size: 30px;
+    text-align: center;
+    display: inline-block;
+}
+
+article h2 {
+	font-size: 30px;
+	padding: 0px;
+	margin: auto;
+}
