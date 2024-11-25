@@ -18,10 +18,13 @@
     width: 20%;
     border: none;
     border-radius: 4px;
-	float: right;
+	position: absolute;
+	right: 30px;
+	box-sizing: border-box;
+	/* float: right;
 	margin-top: 11px;
 	margin-bottom:	11px;
-	margin-right: 30px;
+	margin-right: 30px; */
 }
 
 .search-btn:hover {
@@ -29,12 +32,15 @@
 }
 
 .locations, .amenities {
-	display: inline-block;
-	vertical-align: middle;
+	/* display: inline-block;
+	vertical-align: middle; */
     height: 100%;
     width: 25%;
+	display: flex;
 	justify-content: center;
-	margin-left: 45px;
+	flex-direction: column;
+	box-sizing: border-box;
+	/* margin-left: 45px; */
 }
 
 .filters .locations {
@@ -88,3 +94,85 @@ ul {
 .amenities:hover .popover {
 	display: inline-block;
 }
+
+@media only screen and (max-width: 1030px) 
+{
+    .filters {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+@media only screen and (max-width: 600px) 
+{
+    .filters .locations,.filters .amenities {
+        width: 35%;
+    }
+    .filters .locations ul, .filters .amenities ul  {
+        padding: 0.7em;
+      }
+    .filters .locations li {
+        margin: 0 0 0 5%;
+        padding: 0;
+    }
+
+}
+@media only screen and (max-width: 360px) 
+{
+    .filters button {
+        font-size: 16px;
+        justify-content: center;
+        right: 8px;
+        width: 25%;
+        padding: 0px;
+    }
+}
+@media only screen and (max-width: 350px) 
+{
+    .filters .locations,.filters .amenities {
+        width: 35%;
+        font-size: 0.85em;
+    }
+    .filters .locations h3,  .filters .amenities h3{
+        font-size: 1.1em;
+        margin: 2px 7px;
+    }
+    .locations h4,  .amenities h4{
+        font-weight: 400;
+        font-size: 0.9em;
+        margin: 2px 7px;    
+    }
+    .filters .locations ul {
+        padding: 0.1em;
+      }
+    .filters .amenities ul {
+        padding: 0.8em;
+
+    }
+}
+@media only screen and (max-width: 280px) 
+{
+    .filters button {
+        font-size: 12px;
+        width: 20%;
+        padding: 0;
+    }
+    .popover h2 {
+        font-size: 11px;
+    }
+    
+}
+@media only screen and (max-width: 250px) 
+{
+    .filters button {
+        font-size: 11px;
+        width: 20%;
+        padding: 0;   
+    }
+    .filters .locations ul{
+        padding: 0;
+      }
+      .filters .amenities ul {
+          padding: 1em;
+      } 
+}
+
